@@ -1,0 +1,29 @@
+# ~/.ticker.yaml
+show-summary: true
+show-tags: true
+show-fundamentals: true
+show-separator: true
+show-holdings: true
+interval: 5
+currency: USD
+currency-summary-only: false
+watchlist:
+  - AAPL
+  - META
+  - GOOGL
+lots:
+  - symbol: "META"
+    quantity: 1870.0
+    unit_cost: 590.61
+  - symbol: "PCOR"
+    quantity: 3113
+    unit_cost: 2.84
+  - symbol: "RDDT"
+    quantity: 200
+    unit_cost: 174.00
+groups:
+  - name: crypto
+    watchlist:
+      - SHIB-USD
+      - VGX-USD
+      - BTC-USD

@@ -1,0 +1,10 @@
+#!/usr/bin/env fish
+
+set options \
+    style=round \
+    width=10.0 \
+    hidpi=off \
+    active_color=0xff00ff00 \
+    inactive_color=0x00000000
+
+borders $options

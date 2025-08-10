@@ -11,6 +11,33 @@ watchlist:
   - AAPL
   - META
   - GOOGL
+  - NVDA
+  - MSFT
+  - AMZN
+  - TSLA
+  - AMD
+  - CRM
+  - V
+  - MA
+  - JPM
+  - BRK.B
+  - SPY
+  - VOO
+  - PLTR
+  - AI
+  - SNOW
+  - DDOG
+  - NET
+  - PATH
+  - ADBE
+  - ORCL
+  - IBM
+  - BABA
+  - BIDU
+  - SMCI
+  - MRVL
+  - ARM
+  - AVGO
 lots:
   - symbol: "META"
     quantity: 1870.0

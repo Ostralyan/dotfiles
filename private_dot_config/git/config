@@ -1,0 +1,13 @@
+[alias]
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	co = checkout
+	f = fetch
+	s = status
+	cax = commit --amend --no-edit
+	rb = rebase
+[user]
+	name = Luke Xu
+	email = lukecxu@gmail.com
+[push]
+	autoSetupRemote = true
+

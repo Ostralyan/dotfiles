@@ -7,7 +7,7 @@ font-family = CaskaydiaCove Nerd Font Mono
 # font-family = Hasklug Nerd Font
 # font-family = Lilex Nerd Font
 
-background-opacity = 0.80
+background-opacity = 0.93
 background-blur = true
 background-blur-radius = 100
 auto-update = download

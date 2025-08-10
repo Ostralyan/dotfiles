@@ -18,13 +18,19 @@ vim.opt.autoindent = true       -- Copy indent from current line when starting n
 vim.opt.breakindent = true      -- Enable break indent
 vim.opt.shiftround = true       -- Round indent to multiple of shiftwidth
 
--- Set the color of all line numbers
+
+-- Set Normal highlight group background to none (transparent)
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })  -- non-current windows
+
+-- Optional: Make cursor line transparent
+vim.api.nvim_set_hl(0, "CursorLine", { bg = "none" })
 
 -- Set the color of the current line number
 vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = 'red', bold = true })
 
 vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "white" })
-vim.api.nvim_set_hl(0, 'LineNr', { fg = 'red' }) -- Replace #AABBCC with your desired color
+vim.api.nvim_set_hl(0, 'LineNr', { fg = 'red', bg = "none" }) -- Replace #AABBCC with your desired color
 vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "pink" })
 
 

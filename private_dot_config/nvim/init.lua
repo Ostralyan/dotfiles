@@ -27,11 +27,11 @@ vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })  -- non-current windows
 vim.api.nvim_set_hl(0, "CursorLine", { bg = "none" })
 
 -- Set the color of the current line number
-vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = 'red', bold = true })
+vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = '#89b4fa', bold = true })
 
-vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "white" })
-vim.api.nvim_set_hl(0, 'LineNr', { fg = 'red', bg = "none" }) -- Replace #AABBCC with your desired color
-vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "pink" })
+vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#f5e0dc" })
+vim.api.nvim_set_hl(0, 'LineNr', { fg = '#f38ba8', bg = "none" }) -- Replace #AABBCC with your desired color
+vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#f5e0dc" })
 
 
 -- Auto-reload files when changed outside of nvim

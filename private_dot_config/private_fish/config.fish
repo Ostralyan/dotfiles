@@ -7,6 +7,7 @@ starship init fish | source
 fish_vi_key_bindings
 
 set -gx PATH $PATH /Users/lukexu/go/bin
+set -gx PATH $HOME/.cargo/bin $PATH
 
 alias kroota="cd ~/Code/kroota; and ~/.kroota-setup.fish"
 

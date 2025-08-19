@@ -1,15 +1,19 @@
 if status is-interactive
     atuin init fish | source
-    # Commands to run in interactive sessions can go here
 end
 
 starship init fish | source
 fish_vi_key_bindings
 
-set -gx PATH $PATH /Users/lukexu/go/bin
-set -gx PATH $HOME/.cargo/bin $PATH
+set -gx PATH $PATH $HOME/go/bin
+set -gx PATH $PATH $HOME/.cargo/bin 
 
-alias kroota="cd ~/Code/kroota; and ~/.kroota-setup.fish"
+alias cm=chezmoi
+alias ls=eza
+
+# Sources the fzf theme
+source ~/.config/fzf/themes/catppuccin-fzf-mocha.fish
+
 
 # Zoxide
 # # =============================================================================
@@ -106,4 +110,3 @@ alias cd=__zoxide_z
 abbr --erase zi &>/dev/null
 alias cdi=__zoxide_zi
 
-alias ls=eza

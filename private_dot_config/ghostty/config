@@ -8,8 +8,8 @@ font-family = FantasqueSansM Nerd Font Mono
 # font-family = Hasklug Nerd Font
 # font-family = Lilex Nerd Font
 
-background-opacity = 0.85
-background-blur = false
-# background-blur-radius = 100
+background-opacity = 0.90
+background-blur = true
+background-blur-radius = 25
 auto-update = download
 

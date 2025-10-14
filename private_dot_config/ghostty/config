@@ -1,4 +1,4 @@
-theme = catppuccin-mocha
+theme = catppuccin-mocha.conf
 font-size = 16
 
 # font-family = FiraCode Nerd Font Mono
@@ -8,7 +8,7 @@ font-family = FantasqueSansM Nerd Font Mono
 # font-family = Hasklug Nerd Font
 # font-family = Lilex Nerd Font
 
-background-opacity = 0.70
+background-opacity = 0.85
 background-blur = false
 # background-blur-radius = 100
 auto-update = download

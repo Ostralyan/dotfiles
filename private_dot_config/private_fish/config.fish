@@ -7,6 +7,9 @@ fish_vi_key_bindings
 
 set -gx PATH $PATH $HOME/go/bin
 set -gx PATH $PATH $HOME/.cargo/bin 
+set -gx PATH $PATH $HOME/.pub-cache/bin
+set -Ux PYENV_ROOT $HOME/.pyenv
+set -U fish_user_paths $PYENV_ROOT/bin $fish_user_paths
 
 alias cm=chezmoi
 alias ls=eza
@@ -110,3 +113,21 @@ alias cd=__zoxide_z
 abbr --erase zi &>/dev/null
 alias cdi=__zoxide_zi
 
+
+function zk --description 'Kill process on port'
+    if test (count $argv) -eq 0
+        echo "Usage: zk <port>"
+        return 1
+    end
+
+    set port $argv[1]
+    set pids (lsof -ti:$port 2>/dev/null)
+
+    if test -z "$pids"
+        echo "No process running on port $port"
+    else
+        echo $pids | xargs kill -9
+        echo "Killed process(es) on port $port"
+    end
+end
+export PATH="$HOME/.local/bin:$PATH"

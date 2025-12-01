@@ -19,34 +19,27 @@ return {
       },
       automatic_installation = true,
     })
-    
-    -- Get blink capabilities (different from nvim-cmp)
+    -- Share blink capabilities with every server we enable.
     local capabilities = require('blink.cmp').get_lsp_capabilities()
-    
-    local lspconfig = require("lspconfig")
-    
-    -- Python setup
-    lspconfig.pyright.setup({
+    vim.lsp.config('*', {
       capabilities = capabilities,
+    })
+
+    -- Python setup
+    vim.lsp.config('pyright', {
       settings = {
         python = {
           analysis = {
             typeCheckingMode = "basic",
             autoSearchPaths = true,
             useLibraryCodeForTypes = true,
-          }
-        }
-      }
+          },
+        },
+      },
     })
-    
-    -- TypeScript setup
-    lspconfig.ts_ls.setup({
-      capabilities = capabilities,
-    })
-    
+
     -- Lua setup (for Neovim config)
-    lspconfig.lua_ls.setup({
-      capabilities = capabilities,
+    vim.lsp.config('lua_ls', {
       settings = {
         Lua = {
           diagnostics = {
@@ -55,12 +48,11 @@ return {
         },
       },
     })
-    
+
     -- Go setup
-    lspconfig.gopls.setup({
-      capabilities = capabilities,
+    vim.lsp.config('gopls', {
       filetypes = { "go", "gomod", "gowork", "gotmpl" },
-      root_dir = lspconfig.util.root_pattern("go.mod", ".git", "go.work"),
+      root_markers = { "go.work", "go.mod", ".git" },
       settings = {
         gopls = {
           analyses = {
@@ -68,12 +60,15 @@ return {
           },
           staticcheck = true,
           gofumpt = true,
-	  buildFlags = {"-mod=mod"},
-	  env = {
-	    GOFLAGS = "-mod=mod",
-  	  }
+          buildFlags = { "-mod=mod" },
+          env = {
+            GOFLAGS = "-mod=mod",
+          },
         },
       },
     })
+
+    -- TypeScript uses defaults from nvim-lspconfig; just enable it
+    vim.lsp.enable({ "pyright", "ts_ls", "lua_ls", "gopls" })
   end,
 }

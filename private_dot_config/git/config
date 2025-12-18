@@ -5,6 +5,9 @@
 	s = status
 	cax = commit --amend --no-edit
 	rb = rebase
+	b = branch
+	c = commit
+	aic = !~/.config/git/bin/git-ai-commit
 [user]
 	name = Luke Xu
 	email = lukecxu@gmail.com

@@ -131,3 +131,11 @@ function zk --description 'Kill process on port'
     end
 end
 export PATH="$HOME/.local/bin:$PATH"
+
+# fnm (Fast Node Manager)
+fnm env --use-on-cd | source
+
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH

@@ -1,0 +1,5 @@
+.config/chezmoi
+.config/AWSVPNClient
+.config/didero
+.config/gcloud
+.config/stripe

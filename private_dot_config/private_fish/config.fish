@@ -13,6 +13,7 @@ set -U fish_user_paths $PYENV_ROOT/bin $fish_user_paths
 
 alias cm=chezmoi
 alias ls=eza
+alias eng-report="uv run --with google-genai python ~/scripts/eng-report.py"
 
 # Sources the fzf theme
 source ~/.config/fzf/themes/catppuccin-fzf-mocha.fish
@@ -143,3 +144,4 @@ set --export PATH $BUN_INSTALL/bin $PATH
 # Added by OrbStack: command-line tools and integration
 # This won't be added again if you remove it.
 source ~/.orbstack/shell/init2.fish 2>/dev/null || :
+

@@ -7,9 +7,6 @@ fish_vi_key_bindings
 
 set -gx PATH $PATH $HOME/go/bin
 set -gx PATH $PATH $HOME/.cargo/bin 
-set -gx PATH $PATH $HOME/.pub-cache/bin
-set -Ux PYENV_ROOT $HOME/.pyenv
-set -U fish_user_paths $PYENV_ROOT/bin $fish_user_paths
 
 alias cm=chezmoi
 alias ls=eza
@@ -131,8 +128,6 @@ function zk --description 'Kill process on port'
         echo "Killed process(es) on port $port"
     end
 end
-export PATH="$HOME/.local/bin:$PATH"
-
 # fnm (Fast Node Manager)
 fnm env --use-on-cd | source
 

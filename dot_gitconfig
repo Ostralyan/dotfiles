@@ -1,0 +1,14 @@
+[user]
+	name = Luke Xu
+	email = lx@didero.ai
+[alias]
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	co = checkout
+	s = status
+	f = fetch
+	cax = commit --amend --no-edit
+	loc = "!f() { git log --format='%aN' | sort -u | while IFS= read -r author; do git log --author=\"$author\" --pretty=tformat: --numstat | awk -v a=\"$author\" '{ add += $1; subs += $2 } END { printf \"%d|%s|+%d -%d (net: %d)\\n\", add, a, add, subs, add-subs }'; done | sort -t'|' -k1 -rn | while IFS='|' read -r _ name val; do echo \"$name:\"; echo \"  $val\"; done; }; f"
+[push]
+	autoSetupRemote = true
+[core]
+	editor = nvim

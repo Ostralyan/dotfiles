@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(fish:*)",
+      "Bash(command:*)",
+      "Bash(brew list:*)",
+      "WebSearch",
+      "Bash(ghostty:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(git clone:*)",
+      "Bash(ls:*)",
+      "Bash(chezmoi managed:*)",
+      "Bash(chezmoi forget:*)",
+      "Bash(chezmoi source-path:*)",
+      "Bash(chezmoi re-add:*)",
+      "Bash(chezmoi add:*)",
+      "Bash(rm:*)"
+    ]
+  }
+}

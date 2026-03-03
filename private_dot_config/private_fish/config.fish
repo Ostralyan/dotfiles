@@ -2,6 +2,7 @@ if status is-interactive
     atuin init fish | source
 end
 
+set -gx CLOUDSDK_PYTHON /opt/homebrew/bin/python3.14
 starship init fish | source
 fish_vi_key_bindings
 

@@ -77,6 +77,10 @@ if.app-id = 'com.linear'
 run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
+if.app-id = 'com.automattic.beeper.desktop'
+run = 'move-node-to-workspace Q'
+
+[[on-window-detected]]
 if.app-id = 'ai.krisp.krispMac'
 run = 'move-node-to-workspace R'
 

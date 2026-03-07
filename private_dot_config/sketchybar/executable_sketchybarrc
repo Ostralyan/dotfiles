@@ -99,28 +99,6 @@ sketchybar --add item clock right \
                  icon.padding_left=10 \
                  label.padding_right=10 \
            --subscribe battery system_woke power_source_change \
-           --add item cpu right \
-           --set cpu update_freq=5 \
-                 icon="󰍛" \
-                 script="$PLUGIN_DIR/cpu.sh" \
-                 background.color=0xff1e1e2e \
-                 background.height=40 \
-                 background.drawing=on \
-                 icon.color=0xffcba6f7 \
-                 label.color=0xffcba6f7 \
-                 icon.padding_left=10 \
-                 label.padding_right=10 \
-           --add item ram right \
-           --set ram update_freq=10 \
-                 icon="󰘚" \
-                 script="$PLUGIN_DIR/ram.sh" \
-                 background.color=0xff1e1e2e \
-                 background.height=40 \
-                 background.drawing=on \
-                 icon.color=0xfff38ba8 \
-                 label.color=0xfff38ba8 \
-                 icon.padding_left=10 \
-                 label.padding_right=10 \
            --add item weather right \
            --set weather update_freq=600 \
                  script="$PLUGIN_DIR/weather.sh" \
@@ -132,7 +110,7 @@ sketchybar --add item clock right \
                  icon.padding_left=10 \
                  label.padding_right=10 \
            --add item stock right \
-           --set stock update_freq=300 \
+           --set stock update_freq=3 \
                  script="$PLUGIN_DIR/stock.sh" \
                  click_script="$PLUGIN_DIR/stock_rotate.sh" \
                  background.color=0xff1e1e2e \
@@ -171,14 +149,6 @@ setup_popup() {
 ##### Battery popup #####
 setup_popup battery 0xfffab387
 for i in 1 2 3; do add_popup_line battery battery.line$i 0xfffab387; done
-
-##### CPU popup #####
-setup_popup cpu 0xffcba6f7
-for i in 1 2 3 4 5; do add_popup_line cpu cpu.line$i 0xffcba6f7; done
-
-##### RAM popup #####
-setup_popup ram 0xfff38ba8
-for i in 1 2 3 4; do add_popup_line ram ram.line$i 0xfff38ba8; done
 
 ##### Weather popup #####
 setup_popup weather 0xff94e2d5

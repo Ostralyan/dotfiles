@@ -1,7 +1,7 @@
 #!/bin/bash
 
 STOCKS_FILE="$CONFIG_DIR/plugins/.stock_index"
-STOCKS=("META" "PCOR")
+STOCKS=("META" "PCOR" "GOOGL" "AAPL" "MSFT" "AVGO" "NVDA")
 COUNT=${#STOCKS[@]}
 
 # Read current index

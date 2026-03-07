@@ -10,24 +10,42 @@ elif [ "$SENDER" = "mouse.exited" ]; then
 fi
 
 STOCKS_FILE="$CONFIG_DIR/plugins/.stock_index"
-STOCKS=("META" "PCOR")
+CACHE_DIR="$CONFIG_DIR/plugins/.stock_cache"
+STOCKS=("META" "PCOR" "GOOGL" "AAPL" "MSFT" "AVGO" "NVDA")
+COUNT=${#STOCKS[@]}
 
-# Read current index
+mkdir -p "$CACHE_DIR"
+
+# Rotate index
 INDEX=0
 if [ -f "$STOCKS_FILE" ]; then
   INDEX=$(cat "$STOCKS_FILE")
 fi
-
-# Ensure valid index
-if [ "$INDEX" -ge "${#STOCKS[@]}" ] || [ "$INDEX" -lt 0 ]; then
-  INDEX=0
-fi
+INDEX=$(( (INDEX + 1) % COUNT ))
+echo "$INDEX" > "$STOCKS_FILE"
 
 SYMBOL="${STOCKS[$INDEX]}"
+CACHE_FILE="$CACHE_DIR/$SYMBOL"
 
-# Fetch data from Yahoo Finance
-DATA=$(curl -s -A "Mozilla/5.0" "https://query1.finance.yahoo.com/v8/finance/chart/$SYMBOL?range=1d&interval=1d")
+# Refresh cache if older than 5 minutes or missing
+REFRESH=false
+if [ ! -f "$CACHE_FILE" ]; then
+  REFRESH=true
+else
+  AGE=$(( $(date +%s) - $(stat -f %m "$CACHE_FILE") ))
+  if [ "$AGE" -gt 300 ]; then
+    REFRESH=true
+  fi
+fi
 
+if [ "$REFRESH" = true ]; then
+  DATA=$(curl -s -A "Mozilla/5.0" "https://query1.finance.yahoo.com/v8/finance/chart/$SYMBOL?range=1d&interval=1d")
+  if [ -n "$DATA" ]; then
+    echo "$DATA" > "$CACHE_FILE"
+  fi
+fi
+
+DATA=$(cat "$CACHE_FILE" 2>/dev/null)
 PRICE=$(echo "$DATA" | grep -oE '"regularMarketPrice":[0-9.]+' | head -1 | cut -d: -f2)
 PREV=$(echo "$DATA" | grep -oE '"chartPreviousClose":[0-9.]+' | head -1 | cut -d: -f2)
 
@@ -38,17 +56,16 @@ fi
 
 PRICE_FMT=$(printf "%.2f" "$PRICE")
 
-# Compare to previous close
 if [ -n "$PREV" ]; then
   UP=$(echo "$PRICE > $PREV" | bc -l)
   if [ "$UP" -eq 1 ]; then
-    COLOR="0xffa6e3a1"  # green
+    COLOR="0xffa6e3a1"
   else
-    COLOR="0xfff38ba8"  # red
+    COLOR="0xfff38ba8"
   fi
 else
   COLOR="0xffa6e3a1"
 fi
 
 sketchybar --set "$NAME" icon="$SYMBOL" label="\$$PRICE_FMT" \
-  background.border_color="$COLOR" icon.color="$COLOR" label.color="$COLOR"
+  icon.color="$COLOR" label.color="$COLOR"

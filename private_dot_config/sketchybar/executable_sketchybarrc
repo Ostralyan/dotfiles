@@ -1,0 +1,210 @@
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+
+##### Bar Appearance #####
+sketchybar --bar position=top height=40 blur_radius=30 color=0x601e1e2e
+
+##### Changing Defaults #####
+default=(
+  padding_left=5
+  padding_right=5
+  icon.font="FantasqueSansM Nerd Font Mono:Bold:17.0"
+  label.font="FantasqueSansM Nerd Font Mono:Bold:14.0"
+  icon.color=0xffcdd6f4
+  label.color=0xffcdd6f4
+  icon.padding_left=4
+  icon.padding_right=4
+  label.padding_left=4
+  label.padding_right=4
+  background.border_width=2
+)
+sketchybar --default "${default[@]}"
+
+##### Aerospace Workspaces #####
+sketchybar --add event aerospace_workspace_change
+
+source "$PLUGIN_DIR/icon_map.sh"
+
+SPACE_NAMES=()
+FOCUSED="$(aerospace list-workspaces --focused)"
+OCCUPIED="$(aerospace list-workspaces --monitor all --empty no)"
+
+for sid in $(aerospace list-workspaces --all); do
+  SPACE_NAMES+=(space.$sid)
+  ICON="$sid"
+  LABEL="$(workspace_name "$sid")"
+
+  SHOW=off
+  if echo "$OCCUPIED" | grep -qx "$sid" || [ "$sid" = "$FOCUSED" ]; then
+    SHOW=on
+  fi
+
+  sketchybar --add item space.$sid left \
+    --subscribe space.$sid aerospace_workspace_change \
+    --set space.$sid \
+      icon="$ICON" \
+      drawing="$SHOW" \
+      padding_left=0 \
+      padding_right=0 \
+      icon.padding_left=10 \
+      icon.padding_right=10 \
+      background.drawing=off \
+      label.drawing=off \
+      click_script="aerospace workspace $sid" \
+      script="$PLUGIN_DIR/aerospace.sh $sid"
+done
+
+sketchybar --add bracket spaces "${SPACE_NAMES[@]}" \
+           --set spaces \
+             background.color=0xff1e1e2e \
+             background.corner_radius=14 \
+             background.height=28 \
+             background.drawing=on \
+             background.border_width=2 \
+             background.border_color=0xff585b70
+
+##### Left Items #####
+sketchybar --add item front_app left \
+           --set front_app icon.drawing=off \
+                 label.color=0xfff5c2e7 \
+                 script="$PLUGIN_DIR/front_app.sh" \
+           --subscribe front_app front_app_switched
+
+##### Right Items #####
+sketchybar --add item clock right \
+           --set clock update_freq=10 \
+                 icon="󰃭" \
+                 script="$PLUGIN_DIR/clock.sh" \
+                 click_script="open -a Itsycal" \
+                 background.color=0xff1e1e2e \
+                 background.corner_radius=14 \
+                 background.height=28 \
+                 background.drawing=on \
+                 background.border_color=0xff89b4fa \
+                 icon.color=0xff89b4fa \
+                 label.color=0xff89b4fa \
+                 icon.padding_left=10 \
+                 label.padding_right=10 \
+           --add item volume right \
+           --set volume script="$PLUGIN_DIR/volume.sh" \
+                 background.color=0xff1e1e2e \
+                 background.corner_radius=14 \
+                 background.height=28 \
+                 background.drawing=on \
+                 background.border_color=0xffa6e3a1 \
+                 icon.color=0xffa6e3a1 \
+                 label.color=0xffa6e3a1 \
+                 icon.padding_left=10 \
+                 label.padding_right=10 \
+           --subscribe volume volume_change \
+           --add item battery right \
+           --set battery update_freq=120 \
+                 script="$PLUGIN_DIR/battery.sh" \
+                 background.color=0xff1e1e2e \
+                 background.corner_radius=14 \
+                 background.height=28 \
+                 background.drawing=on \
+                 background.border_color=0xfffab387 \
+                 icon.color=0xfffab387 \
+                 label.color=0xfffab387 \
+                 icon.padding_left=10 \
+                 label.padding_right=10 \
+           --subscribe battery system_woke power_source_change \
+           --add item cpu right \
+           --set cpu update_freq=5 \
+                 icon="󰍛" \
+                 script="$PLUGIN_DIR/cpu.sh" \
+                 background.color=0xff1e1e2e \
+                 background.corner_radius=14 \
+                 background.height=28 \
+                 background.drawing=on \
+                 background.border_color=0xffcba6f7 \
+                 icon.color=0xffcba6f7 \
+                 label.color=0xffcba6f7 \
+                 icon.padding_left=10 \
+                 label.padding_right=10 \
+           --add item ram right \
+           --set ram update_freq=10 \
+                 icon="󰘚" \
+                 script="$PLUGIN_DIR/ram.sh" \
+                 background.color=0xff1e1e2e \
+                 background.corner_radius=14 \
+                 background.height=28 \
+                 background.drawing=on \
+                 background.border_color=0xfff38ba8 \
+                 icon.color=0xfff38ba8 \
+                 label.color=0xfff38ba8 \
+                 icon.padding_left=10 \
+                 label.padding_right=10 \
+           --add item weather right \
+           --set weather update_freq=600 \
+                 script="$PLUGIN_DIR/weather.sh" \
+                 background.color=0xff1e1e2e \
+                 background.corner_radius=14 \
+                 background.height=28 \
+                 background.drawing=on \
+                 background.border_color=0xff94e2d5 \
+                 icon.color=0xff94e2d5 \
+                 label.color=0xff94e2d5 \
+                 icon.padding_left=10 \
+                 label.padding_right=10 \
+           --add item stock right \
+           --set stock update_freq=300 \
+                 script="$PLUGIN_DIR/stock.sh" \
+                 click_script="$PLUGIN_DIR/stock_rotate.sh" \
+                 background.color=0xff1e1e2e \
+                 background.corner_radius=14 \
+                 background.height=28 \
+                 background.drawing=on \
+                 background.border_color=0xffa6e3a1 \
+                 icon.color=0xffa6e3a1 \
+                 label.color=0xffa6e3a1 \
+                 icon.padding_left=10 \
+                 label.padding_right=10
+
+##### Popup helper function #####
+add_popup_line() {
+  local PARENT=$1 ITEM=$2 COLOR=$3
+  sketchybar --add item $ITEM popup.$PARENT \
+             --set $ITEM \
+                   icon.drawing=off \
+                   label.font="FantasqueSansM Nerd Font Mono:Bold:12.0" \
+                   label.color=$COLOR \
+                   label.padding_left=10 \
+                   label.padding_right=10 \
+                   background.drawing=off \
+                   background.border_width=0
+}
+
+setup_popup() {
+  local PARENT=$1 COLOR=$2
+  sketchybar --set $PARENT popup.drawing=off \
+             --subscribe $PARENT mouse.entered mouse.exited \
+             --set $PARENT \
+                   popup.background.color=0xff1e1e2e \
+                   popup.background.corner_radius=10 \
+                   popup.background.border_width=2 \
+                   popup.background.border_color=$COLOR
+}
+
+##### Battery popup #####
+setup_popup battery 0xfffab387
+for i in 1 2 3; do add_popup_line battery battery.line$i 0xfffab387; done
+
+##### CPU popup #####
+setup_popup cpu 0xffcba6f7
+for i in 1 2 3 4 5; do add_popup_line cpu cpu.line$i 0xffcba6f7; done
+
+##### RAM popup #####
+setup_popup ram 0xfff38ba8
+for i in 1 2 3 4; do add_popup_line ram ram.line$i 0xfff38ba8; done
+
+##### Weather popup #####
+setup_popup weather 0xff94e2d5
+for i in 1 2 3 4; do add_popup_line weather weather.line$i 0xff94e2d5; done
+
+##### Stock popup #####
+setup_popup stock 0xffa6e3a1
+for i in 1 2 3 4; do add_popup_line stock stock.line$i 0xffa6e3a1; done
+
+##### Force all scripts to run the first time (never do this in a script) #####
+sketchybar --update

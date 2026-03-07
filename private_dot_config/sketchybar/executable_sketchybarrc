@@ -46,9 +46,12 @@ for sid in $(aerospace list-workspaces --all); do
       padding_left=0 \
       padding_right=0 \
       icon.padding_left=10 \
-      icon.padding_right=10 \
+      icon.padding_right=2 \
       background.drawing=off \
+      label="$LABEL" \
       label.drawing=off \
+      label.font="FantasqueSansM Nerd Font Mono:Bold:14.0" \
+      label.padding_right=8 \
       click_script="aerospace workspace $sid" \
       script="$PLUGIN_DIR/aerospace.sh $sid"
 done
@@ -61,13 +64,6 @@ sketchybar --add bracket spaces "${SPACE_NAMES[@]}" \
              background.drawing=on \
              background.border_width=2 \
              background.border_color=0xff585b70
-
-##### Left Items #####
-sketchybar --add item front_app left \
-           --set front_app icon.drawing=off \
-                 label.color=0xfff5c2e7 \
-                 script="$PLUGIN_DIR/front_app.sh" \
-           --subscribe front_app front_app_switched
 
 ##### Right Items #####
 sketchybar --add item clock right \

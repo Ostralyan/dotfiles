@@ -66,7 +66,7 @@ run = 'move-node-to-workspace D'
 
 [[on-window-detected]]
 if.app-id = 'notion.id'
-run = 'move-node-to-workspace N'
+run = 'move-node-to-workspace E'
 
 [[on-window-detected]]
 if.app-id = 'company.thebrowser.dia'
@@ -79,10 +79,6 @@ run = 'move-node-to-workspace 3'
 [[on-window-detected]]
 if.app-id = 'com.automattic.beeper.desktop'
 run = 'move-node-to-workspace Q'
-
-[[on-window-detected]]
-if.app-id = 'ai.krisp.krispMac'
-run = 'move-node-to-workspace R'
 
 [[on-window-detected]]
 if.app-id = 'com.github.marktext.marktext'
@@ -174,11 +170,6 @@ run = 'move-node-to-workspace 4'
     alt-e = 'workspace E'
     alt-f = 'fullscreen'
     alt-g = 'workspace G'
-    alt-i = 'workspace I'
-    alt-m = 'workspace M'
-    alt-n = 'workspace N'
-    alt-o = 'workspace O'
-    alt-p = 'workspace P'
     alt-q = 'workspace Q'
     alt-r = 'workspace R'
     alt-s = 'workspace S'
@@ -193,11 +184,6 @@ run = 'move-node-to-workspace 4'
     alt-shift-d = 'move-node-to-workspace D'
     alt-shift-e = 'move-node-to-workspace E'
     alt-shift-g = 'move-node-to-workspace G'
-    alt-shift-i = 'move-node-to-workspace I'
-    alt-shift-m = 'move-node-to-workspace M'
-    alt-shift-n = 'move-node-to-workspace N'
-    alt-shift-o = 'move-node-to-workspace O'
-    alt-shift-p = 'move-node-to-workspace P'
     alt-shift-q = 'move-node-to-workspace Q'
     alt-shift-r = 'move-node-to-workspace R'
     alt-shift-s = 'move-node-to-workspace S'

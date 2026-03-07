@@ -1,7 +1,7 @@
 #!/bin/bash
 
 STOCKS_FILE="$CONFIG_DIR/plugins/.stock_index"
-STOCKS=("META" "PCOR" "GOOGL" "AAPL" "MSFT" "AVGO" "NVDA")
+STOCKS=("META" "PCOR" "GOOGL" "AAPL" "MSFT" "AVGO" "NVDA" "AMZN")
 
 INDEX=0
 if [ -f "$STOCKS_FILE" ]; then

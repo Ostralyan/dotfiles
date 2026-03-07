@@ -1,7 +1,7 @@
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 
 ##### Bar Appearance #####
-sketchybar --bar position=top height=40 blur_radius=0 color=0xff1e1e2e
+sketchybar --bar position=top height=31 blur_radius=0 color=0xff1e1e2e
 
 ##### Changing Defaults #####
 default=(
@@ -15,7 +15,7 @@ default=(
   icon.padding_right=4
   label.padding_left=4
   label.padding_right=8
-  background.height=40
+  background.height=31
   background.corner_radius=0
   background.border_width=0
 )
@@ -61,64 +61,107 @@ sketchybar --add item workspace_name left \
                  background.drawing=off \
                  label.padding_left=10 \
                  label.padding_right=10 \
-                 script="$PLUGIN_DIR/workspace_name.sh"
+                 script="$PLUGIN_DIR/workspace_name.sh" \
+           --add item divider left \
+           --set divider \
+                 icon="|" \
+                 icon.color=0xff585b70 \
+                 icon.padding_left=8 \
+                 icon.padding_right=8 \
+                 label.drawing=off \
+                 background.drawing=off \
+           --add item stock left \
+           --set stock update_freq=3 \
+                 script="$PLUGIN_DIR/stock.sh" \
+                 click_script="$PLUGIN_DIR/stock_rotate.sh" \
+                 background.drawing=off \
+                 icon.color=0xffa6e3a1 \
+                 label.color=0xffa6e3a1 \
+                 icon.padding_left=4 \
+                 label.padding_right=4
 
 ##### Right Items #####
-sketchybar --add item clock right \
-           --set clock update_freq=10 \
+# Icon box style: colored square bg behind icon, label text next to it
+ICON_FONT="FantasqueSansM Nerd Font Mono:Bold:22.0"
+
+sketchybar --add item time right \
+           --set time update_freq=10 \
+                 icon="󰅐" \
+                 icon.font="$ICON_FONT" \
+                 script="$PLUGIN_DIR/time.sh" \
+                 background.drawing=off \
+                 icon.background.color=0xff89b4fa \
+                 icon.background.corner_radius=0 \
+                 icon.background.height=31 \
+                 icon.background.drawing=on \
+                 icon.color=0xff1e1e2e \
+                 icon.padding_left=8 \
+                 icon.padding_right=8 \
+                 label.color=0xffcdd6f4 \
+                 label.padding_left=6 \
+                 label.padding_right=10 \
+           --add item date right \
+           --set date update_freq=60 \
                  icon="󰃭" \
-                 script="$PLUGIN_DIR/clock.sh" \
+                 icon.font="$ICON_FONT" \
+                 script="$PLUGIN_DIR/date.sh" \
                  click_script="open -a Itsycal" \
-                 background.color=0xff1e1e2e \
-                 background.height=40 \
-                 background.drawing=on \
-                 background.border_color=0xff89b4fa \
-                 background.border_width=0 \
-                 icon.color=0xff89b4fa \
-                 label.color=0xff89b4fa \
-                 icon.padding_left=10 \
+                 background.drawing=off \
+                 icon.background.color=0xfff5c2e7 \
+                 icon.background.corner_radius=0 \
+                 icon.background.height=31 \
+                 icon.background.drawing=on \
+                 icon.color=0xff1e1e2e \
+                 icon.padding_left=8 \
+                 icon.padding_right=8 \
+                 label.color=0xffcdd6f4 \
+                 label.padding_left=6 \
                  label.padding_right=10 \
            --add item volume right \
            --set volume script="$PLUGIN_DIR/volume.sh" \
-                 background.color=0xff1e1e2e \
-                 background.height=40 \
-                 background.drawing=on \
-                 icon.color=0xffa6e3a1 \
-                 label.color=0xffa6e3a1 \
-                 icon.padding_left=10 \
+                 icon.font="$ICON_FONT" \
+                 background.drawing=off \
+                 icon.background.color=0xffa6e3a1 \
+                 icon.background.corner_radius=0 \
+                 icon.background.height=31 \
+                 icon.background.drawing=on \
+                 icon.color=0xff1e1e2e \
+                 icon.padding_left=8 \
+                 icon.padding_right=8 \
+                 label.color=0xffcdd6f4 \
+                 label.padding_left=6 \
                  label.padding_right=10 \
            --subscribe volume volume_change \
            --add item battery right \
            --set battery update_freq=120 \
+                 icon.font="$ICON_FONT" \
                  script="$PLUGIN_DIR/battery.sh" \
-                 background.color=0xff1e1e2e \
-                 background.height=40 \
-                 background.drawing=on \
-                 icon.color=0xfffab387 \
-                 label.color=0xfffab387 \
-                 icon.padding_left=10 \
+                 background.drawing=off \
+                 icon.background.color=0xfffab387 \
+                 icon.background.corner_radius=0 \
+                 icon.background.height=31 \
+                 icon.background.drawing=on \
+                 icon.color=0xff1e1e2e \
+                 icon.padding_left=8 \
+                 icon.padding_right=8 \
+                 label.color=0xffcdd6f4 \
+                 label.padding_left=6 \
                  label.padding_right=10 \
            --subscribe battery system_woke power_source_change \
            --add item weather right \
            --set weather update_freq=600 \
+                 icon.font="$ICON_FONT" \
                  script="$PLUGIN_DIR/weather.sh" \
-                 background.color=0xff1e1e2e \
-                 background.height=40 \
-                 background.drawing=on \
-                 icon.color=0xff94e2d5 \
-                 label.color=0xff94e2d5 \
-                 icon.padding_left=10 \
-                 label.padding_right=10 \
-           --add item stock right \
-           --set stock update_freq=3 \
-                 script="$PLUGIN_DIR/stock.sh" \
-                 click_script="$PLUGIN_DIR/stock_rotate.sh" \
-                 background.color=0xff1e1e2e \
-                 background.height=40 \
-                 background.drawing=on \
-                 icon.color=0xffa6e3a1 \
-                 label.color=0xffa6e3a1 \
-                 icon.padding_left=10 \
+                 background.drawing=off \
+                 icon.background.color=0xff94e2d5 \
+                 icon.background.corner_radius=0 \
+                 icon.background.height=31 \
+                 icon.background.drawing=on \
+                 icon.color=0xff1e1e2e \
+                 icon.padding_left=8 \
+                 icon.padding_right=8 \
+                 label.color=0xffcdd6f4 \
+                 label.padding_left=6 \
                  label.padding_right=10
 
 ##### Popup helper function #####

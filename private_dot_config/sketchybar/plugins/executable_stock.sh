@@ -11,7 +11,7 @@ fi
 
 STOCKS_FILE="$CONFIG_DIR/plugins/.stock_index"
 CACHE_DIR="$CONFIG_DIR/plugins/.stock_cache"
-STOCKS=("META" "PCOR" "GOOGL" "AAPL" "MSFT" "AVGO" "NVDA")
+STOCKS=("META" "PCOR" "GOOGL" "AAPL" "MSFT" "AVGO" "NVDA" "AMZN")
 COUNT=${#STOCKS[@]}
 
 mkdir -p "$CACHE_DIR"

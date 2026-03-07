@@ -16,4 +16,15 @@ if [ -z "$TEMP" ]; then
   exit 0
 fi
 
-sketchybar --set "$NAME" icon.drawing=off label="${CONDITION} ${TEMP}"
+case "$CONDITION" in
+  *sunny*|*clear*)          ICON="󰖙" ;;
+  *partly*cloudy*)          ICON="󰖕" ;;
+  *cloudy*|*overcast*)      ICON="󰖐" ;;
+  *fog*|*mist*|*haze*)      ICON="󰖑" ;;
+  *rain*|*drizzle*|*shower*) ICON="󰖗" ;;
+  *thunder*|*storm*)        ICON="󰖓" ;;
+  *snow*|*sleet*|*blizzard*) ICON="󰖘" ;;
+  *)                        ICON="󰖐" ;;
+esac
+
+sketchybar --set "$NAME" icon.drawing=on icon="$ICON" label="${CONDITION} ${TEMP}"

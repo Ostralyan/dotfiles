@@ -17,15 +17,16 @@ if [ "$PERCENTAGE" = "" ]; then
 fi
 
 case "${PERCENTAGE}" in
-  9[0-9]|100) ICON="󰁹" ;;
-  [6-8][0-9]) ICON="󰂁" ;;
-  [3-5][0-9]) ICON="󰁿" ;;
-  [1-2][0-9]) ICON="󰁻" ;;
-  *)          ICON="󰁺" ;;
+  9[0-9]|100) ICON="󰁹"; COLOR="0xffa6e3a1" ;;
+  [6-8][0-9]) ICON="󰂁"; COLOR="0xffa6e3a1" ;;
+  [3-5][0-9]) ICON="󰁿"; COLOR="0xfff9e2af" ;;
+  [1-2][0-9]) ICON="󰁻"; COLOR="0xfffab387" ;;
+  *)          ICON="󰁺"; COLOR="0xfff38ba8" ;;
 esac
 
 if [[ "$CHARGING" != "" ]]; then
   ICON="󰂄"
+  COLOR="0xffa6e3a1"
 fi
 
-sketchybar --set "$NAME" icon="$ICON" label="${PERCENTAGE}%"
+sketchybar --set "$NAME" icon="$ICON" label="${PERCENTAGE}%" icon.background.color="$COLOR"

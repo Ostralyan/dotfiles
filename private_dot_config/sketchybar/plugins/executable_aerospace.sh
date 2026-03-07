@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# Active workspace: mauve pill with label
+# Active workspace: full height highlight with label
 if [ "$1" = "$FOCUSED_WORKSPACE" ]; then
   sketchybar --set $NAME drawing=on \
     background.drawing=on \
     background.color=0xffcba6f7 \
-    background.corner_radius=6 \
-    background.height=24 \
+    background.height=40 \
+    background.corner_radius=0 \
     icon.color=0xff1e1e2e \
     icon.padding_right=2 \
     label.drawing=on \

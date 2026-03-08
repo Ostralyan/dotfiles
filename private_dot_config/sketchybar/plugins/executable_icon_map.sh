@@ -33,8 +33,9 @@ workspace_name() {
     C) echo "Claude" ;;
     D) echo "Figma" ;;
     G) echo "ChatGPT" ;;
-    N) echo "Notion" ;;
+    E) echo "Notion" ;;
     R) echo "Krisp" ;;
+    Q) echo "Beeper" ;;
     S) echo "Slack" ;;
     *) echo "$1" ;;
   esac

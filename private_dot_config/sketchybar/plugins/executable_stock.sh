@@ -50,7 +50,7 @@ PRICE=$(echo "$DATA" | grep -oE '"regularMarketPrice":[0-9.]+' | head -1 | cut -
 PREV=$(echo "$DATA" | grep -oE '"chartPreviousClose":[0-9.]+' | head -1 | cut -d: -f2)
 
 if [ -z "$PRICE" ]; then
-  sketchybar --set "$NAME" icon="$SYMBOL" label="--"
+  sketchybar --set "$NAME" label="$SYMBOL --"
   exit 0
 fi
 
@@ -67,5 +67,5 @@ else
   COLOR="0xffa6e3a1"
 fi
 
-sketchybar --set "$NAME" icon="$SYMBOL" label="\$$PRICE_FMT" \
-  icon.color="$COLOR" label.color="$COLOR"
+sketchybar --set "$NAME" label="$SYMBOL \$$PRICE_FMT" \
+  label.color="$COLOR" icon.background.color="$COLOR"

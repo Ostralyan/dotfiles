@@ -21,68 +21,70 @@ default=(
 )
 sketchybar --default "${default[@]}"
 
-##### Aerospace Workspaces #####
+ICON_FONT="FantasqueSansM Nerd Font Mono:Bold:26.0"
+
+##### Aerospace Workspace #####
 sketchybar --add event aerospace_workspace_change
 
 source "$PLUGIN_DIR/icon_map.sh"
 
-SPACE_NAMES=()
 FOCUSED="$(aerospace list-workspaces --focused)"
-OCCUPIED="$(aerospace list-workspaces --monitor all --empty no)"
+FOCUSED_NAME="$(workspace_name "$FOCUSED")"
 
-for sid in $(aerospace list-workspaces --all); do
-  SPACE_NAMES+=(space.$sid)
-  ICON="$sid"
-  LABEL="$(workspace_name "$sid")"
-
-  SHOW=off
-  if echo "$OCCUPIED" | grep -qx "$sid" || [ "$sid" = "$FOCUSED" ]; then
-    SHOW=on
-  fi
-
-  sketchybar --add item space.$sid left \
-    --subscribe space.$sid aerospace_workspace_change \
-    --set space.$sid \
-      icon="$ICON" \
-      drawing="$SHOW" \
-      icon.padding_left=10 \
-      icon.padding_right=10 \
-      background.drawing=off \
-      label.drawing=off \
-      click_script="aerospace workspace $sid" \
-      script="$PLUGIN_DIR/aerospace.sh $sid"
-done
-
-sketchybar --add item workspace_name left \
-           --subscribe workspace_name aerospace_workspace_change \
-           --set workspace_name \
-                 icon.drawing=off \
-                 label.color=0xfff5c2e7 \
+sketchybar --add item workspace left \
+           --subscribe workspace aerospace_workspace_change \
+           --set workspace \
+                 icon="$FOCUSED" \
+                 icon.font="FantasqueSansM Nerd Font Mono:Bold:23.0" \
+                 label="$FOCUSED_NAME" \
+                 script="$PLUGIN_DIR/workspace.sh" \
                  background.drawing=off \
-                 label.padding_left=10 \
-                 label.padding_right=10 \
-                 script="$PLUGIN_DIR/workspace_name.sh" \
-           --add item divider left \
-           --set divider \
-                 icon="|" \
-                 icon.color=0xff585b70 \
+                 icon.background.color=0xffcba6f7 \
+                 icon.background.corner_radius=0 \
+                 icon.background.height=31 \
+                 icon.background.drawing=on \
+                 icon.color=0xff1e1e2e \
                  icon.padding_left=8 \
                  icon.padding_right=8 \
-                 label.drawing=off \
-                 background.drawing=off \
+                 label.color=0xfff5c2e7 \
+                 label.padding_left=6 \
+                 label.padding_right=10 \
            --add item stock left \
            --set stock update_freq=3 \
+                 icon="󰠟" \
+                 icon.font="FantasqueSansM Nerd Font Mono:Bold:26.0" \
                  script="$PLUGIN_DIR/stock.sh" \
                  click_script="$PLUGIN_DIR/stock_rotate.sh" \
                  background.drawing=off \
-                 icon.color=0xffa6e3a1 \
-                 label.color=0xffa6e3a1 \
-                 icon.padding_left=4 \
-                 label.padding_right=4
+                 icon.background.color=0xffa6e3a1 \
+                 icon.background.corner_radius=0 \
+                 icon.background.height=31 \
+                 icon.background.drawing=on \
+                 icon.color=0xff1e1e2e \
+                 icon.padding_left=8 \
+                 icon.padding_right=8 \
+                 label.color=0xffcdd6f4 \
+                 label.padding_left=6 \
+                 label.padding_right=10 \
+           --add item meeting left \
+           --set meeting update_freq=30 \
+                 icon="󰃰" \
+                 icon.font="$ICON_FONT" \
+                 script="$PLUGIN_DIR/meeting.sh" \
+                 click_script="$PLUGIN_DIR/meeting_click.sh" \
+                 background.drawing=off \
+                 icon.background.color=0xfffab387 \
+                 icon.background.corner_radius=0 \
+                 icon.background.height=31 \
+                 icon.background.drawing=on \
+                 icon.color=0xff1e1e2e \
+                 icon.padding_left=8 \
+                 icon.padding_right=8 \
+                 label.color=0xffcdd6f4 \
+                 label.padding_left=6 \
+                 label.padding_right=10
 
 ##### Right Items #####
-# Icon box style: colored square bg behind icon, label text next to it
-ICON_FONT="FantasqueSansM Nerd Font Mono:Bold:22.0"
 
 sketchybar --add item time right \
            --set time update_freq=10 \
@@ -121,7 +123,7 @@ sketchybar --add item time right \
            --set volume script="$PLUGIN_DIR/volume.sh" \
                  icon.font="$ICON_FONT" \
                  background.drawing=off \
-                 icon.background.color=0xffa6e3a1 \
+                 icon.background.color=0xffcba6f7 \
                  icon.background.corner_radius=0 \
                  icon.background.height=31 \
                  icon.background.drawing=on \
@@ -200,6 +202,10 @@ for i in 1 2 3 4; do add_popup_line weather weather.line$i 0xff94e2d5; done
 ##### Stock popup #####
 setup_popup stock 0xffa6e3a1
 for i in 1 2 3 4; do add_popup_line stock stock.line$i 0xffa6e3a1; done
+
+##### Meeting popup #####
+setup_popup meeting 0xffcba6f7
+for i in 1 2 3; do add_popup_line meeting meeting.line$i 0xffcba6f7; done
 
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update

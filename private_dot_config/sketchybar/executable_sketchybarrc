@@ -7,8 +7,8 @@ sketchybar --bar position=top height=31 blur_radius=0 color=0xff1e1e2e
 default=(
   padding_left=0
   padding_right=0
-  icon.font="FantasqueSansM Nerd Font Mono:Bold:17.0"
-  label.font="FantasqueSansM Nerd Font Mono:Bold:17.0"
+  icon.font="FantasqueSansM Nerd Font Mono:Bold:14.0"
+  label.font="FantasqueSansM Nerd Font Mono:Bold:14.0"
   icon.color=0xffcdd6f4
   label.color=0xffcdd6f4
   icon.padding_left=8

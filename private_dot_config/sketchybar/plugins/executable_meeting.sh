@@ -42,21 +42,22 @@ fi
 
 # Title is after the " | " separator
 TITLE=$(echo "$NEXT" | head -1 | sed 's/.*| //;s/^ *//;s/ *$//')
-TIME_STR=$(echo "$NEXT" | head -1 | grep -oE '[0-9]{1,2}:[0-9]{2} (AM|PM)' | head -1)
 
-if [ -z "$TIME_STR" ]; then
-  TIME_STR=$(echo "$NEXT" | head -1 | grep -oE '[0-9]{1,2}:[0-9]{2}' | head -1)
-fi
+# Extract full date and time: "Mar 9, 2026 at 07:00"
+DATE_TIME=$(echo "$NEXT" | head -1 | grep -oE '[A-Z][a-z]+ [0-9]+, [0-9]+ at [0-9]{1,2}:[0-9]{2}' | head -1)
 
-if [ -z "$TIME_STR" ]; then
+if [ -z "$DATE_TIME" ]; then
   sketchybar --set "$NAME" label="$TITLE" icon.background.color=0xfffab387
   exit 0
 fi
 
-# Parse meeting time and calculate minutes until
-MEETING_EPOCH=$(date -j -f "%I:%M %p" "$TIME_STR" +%s 2>/dev/null)
+# Parse full date+time to epoch
+# Format: "Mar 9, 2026 at 07:00"
+MEETING_EPOCH=$(date -j -f "%b %d, %Y at %H:%M" "$DATE_TIME" +%s 2>/dev/null)
 if [ -z "$MEETING_EPOCH" ]; then
-  MEETING_EPOCH=$(date -j -f "%H:%M" "$TIME_STR" +%s 2>/dev/null)
+  # Try single digit day with padding
+  PADDED=$(echo "$DATE_TIME" | sed 's/\([A-Z][a-z]*\) \([0-9]\),/\1  \2,/')
+  MEETING_EPOCH=$(date -j -f "%b %e, %Y at %H:%M" "$PADDED" +%s 2>/dev/null)
 fi
 
 NOW_EPOCH=$(date +%s)
@@ -86,7 +87,7 @@ if [ -n "$MEETING_EPOCH" ]; then
     COLOR="0xfffab387"
   fi
 else
-  LABEL="$TIME_STR"
+  LABEL="$TITLE"
   COLOR="0xfffab387"
 fi
 

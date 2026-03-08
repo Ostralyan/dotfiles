@@ -9,4 +9,4 @@ fi
 
 WS_ICON="$(workspace_name "$WS")"
 
-sketchybar --set "$NAME" icon="$WS" background.image="$WS_ICON"
+sketchybar --set "$NAME" background.image="$WS_ICON"

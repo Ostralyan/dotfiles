@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Get next 3 upcoming events
-EVENTS=$(icalBuddy -f -ea -n -li 3 -nc -nrd -npn -ps "/ | /" -po "datetime,title" -iep "datetime,title" eventsFrom:today to:tomorrow 2>/dev/null)
+EVENTS=$(icalBuddy -f -ea -n -li 3 -nc -nrd -npn -ps "/ | /" -po "datetime,title" -iep "datetime,title" eventsFrom:today to:tomorrow 2>/dev/null | sed -E 's/\x1b\[[0-9;]*m//g')
 
 LINE1="No upcoming meetings"
 LINE2=""

@@ -1,5 +1,8 @@
 .config/chezmoi
 .config/AWSVPNClient
+.config/AWS VPN Client
+.config/pgcli
+.ssh
 .config/didero
 .config/gcloud
 .config/stripe

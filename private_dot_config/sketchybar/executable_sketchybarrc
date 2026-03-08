@@ -29,14 +29,14 @@ sketchybar --add event aerospace_workspace_change
 source "$PLUGIN_DIR/icon_map.sh"
 
 FOCUSED="$(aerospace list-workspaces --focused)"
-FOCUSED_NAME="$(workspace_name "$FOCUSED")"
+FOCUSED_ICON="$(workspace_name "$FOCUSED")"
 
 sketchybar --add item workspace left \
            --subscribe workspace aerospace_workspace_change \
            --set workspace \
                  icon="$FOCUSED" \
                  icon.font="FantasqueSansM Nerd Font Mono:Bold:23.0" \
-                 label="$FOCUSED_NAME" \
+                 label.drawing=off \
                  script="$PLUGIN_DIR/workspace.sh" \
                  background.drawing=off \
                  icon.background.color=0xffcba6f7 \
@@ -46,9 +46,19 @@ sketchybar --add item workspace left \
                  icon.color=0xff1e1e2e \
                  icon.padding_left=8 \
                  icon.padding_right=8 \
-                 label.color=0xfff5c2e7 \
-                 label.padding_left=6 \
-                 label.padding_right=10 \
+           --add item workspace_icon left \
+           --subscribe workspace_icon aerospace_workspace_change \
+           --set workspace_icon \
+                 icon.drawing=off \
+                 label.drawing=off \
+                 background.image="$FOCUSED_ICON" \
+                 background.image.scale=0.2 \
+                 background.drawing=on \
+                 background.color=0x00000000 \
+                 background.height=31 \
+                 padding_left=4 \
+                 padding_right=4 \
+                 script="$PLUGIN_DIR/workspace_icon.sh" \
            --add item stock left \
            --set stock update_freq=3 \
                  icon="󰠟" \

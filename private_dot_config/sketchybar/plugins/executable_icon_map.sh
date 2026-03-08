@@ -10,7 +10,7 @@ workspace_icon() {
     C) echo "󰚩" ;;
     D) echo "" ;;
     E) echo "" ;;
-    G) echo "󰭹" ;;
+    W) echo "󰭹" ;;
     I) echo "" ;;
     M) echo "󰍥" ;;
     N) echo "󰎞" ;;
@@ -23,20 +23,22 @@ workspace_icon() {
   esac
 }
 
+ICONS_DIR="$HOME/.config/sketchybar/icons"
+
 workspace_name() {
   case "$1" in
-    1) echo "Ghostty" ;;
-    2) echo "Dia" ;;
-    3) echo "Linear" ;;
-    4) echo "MarkText" ;;
-    B) echo "Beekeeper" ;;
-    C) echo "Claude" ;;
-    D) echo "Figma" ;;
-    G) echo "ChatGPT" ;;
-    E) echo "Notion" ;;
-    R) echo "Krisp" ;;
-    Q) echo "Beeper" ;;
-    S) echo "Slack" ;;
-    *) echo "$1" ;;
+    1) echo "$ICONS_DIR/ghostty.png" ;;
+    2) echo "$ICONS_DIR/dia.png" ;;
+    3) echo "$ICONS_DIR/linear.png" ;;
+    4) echo "$ICONS_DIR/marktext.png" ;;
+    B) echo "$ICONS_DIR/beekeeper.png" ;;
+    C) echo "$ICONS_DIR/claude.png" ;;
+    D) echo "$ICONS_DIR/figma.png" ;;
+    W) echo "$ICONS_DIR/chatgpt.png" ;;
+    E) echo "$ICONS_DIR/notion.png" ;;
+    R) echo "$ICONS_DIR/krisp.png" ;;
+    Q) echo "$ICONS_DIR/beeper.png" ;;
+    S) echo "$ICONS_DIR/slack.png" ;;
+    *) echo "" ;;
   esac
 }

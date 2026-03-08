@@ -38,7 +38,6 @@ sketchybar --add item workspace left \
                  icon.font="FantasqueSansM Nerd Font Mono:Bold:23.0" \
                  label.drawing=off \
                  script="$PLUGIN_DIR/workspace.sh" \
-                 background.drawing=off \
                  icon.background.color=0xffcba6f7 \
                  icon.background.corner_radius=0 \
                  icon.background.height=31 \
@@ -46,6 +45,8 @@ sketchybar --add item workspace left \
                  icon.color=0xff1e1e2e \
                  icon.padding_left=8 \
                  icon.padding_right=8 \
+                 background.drawing=off \
+                 padding_right=0 \
            --add item workspace_icon left \
            --subscribe workspace_icon aerospace_workspace_change \
            --set workspace_icon \
@@ -54,11 +55,24 @@ sketchybar --add item workspace left \
                  background.image="$FOCUSED_ICON" \
                  background.image.scale=0.2 \
                  background.drawing=on \
-                 background.color=0x00000000 \
+                 background.color=0xffcba6f7 \
                  background.height=31 \
-                 padding_left=4 \
-                 padding_right=4 \
+                 background.corner_radius=0 \
+                 padding_left=0 \
+                 padding_right=0 \
                  script="$PLUGIN_DIR/workspace_icon.sh" \
+           --add item workspace_spacer left \
+           --set workspace_spacer \
+                 icon=" " \
+                 icon.padding_left=0 \
+                 icon.padding_right=4 \
+                 label.drawing=off \
+                 background.drawing=on \
+                 background.color=0xffcba6f7 \
+                 background.height=31 \
+                 background.corner_radius=0 \
+                 padding_left=0 \
+                 padding_right=0 \
            --add item stock left \
            --set stock update_freq=3 \
                  icon="󰠟" \
@@ -93,6 +107,25 @@ sketchybar --add item workspace left \
                  label.color=0xffcdd6f4 \
                  label.padding_left=6 \
                  label.padding_right=10
+
+##### Hyper Key Indicator #####
+sketchybar --add item hyper left \
+           --set hyper \
+                 drawing=on \
+                 icon="󰌌" \
+                 icon.font="$ICON_FONT" \
+                 icon.background.color=0xff585b70 \
+                 icon.background.corner_radius=0 \
+                 icon.background.height=31 \
+                 icon.background.drawing=on \
+                 icon.color=0xff1e1e2e \
+                 icon.padding_left=8 \
+                 icon.padding_right=8 \
+                 label="" \
+                 label.color=0xff585b70 \
+                 label.padding_left=0 \
+                 label.padding_right=6 \
+                 background.drawing=off
 
 ##### Right Items #####
 

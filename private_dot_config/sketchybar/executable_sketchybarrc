@@ -250,5 +250,6 @@ for i in 1 2 3 4; do add_popup_line stock stock.line$i 0xffa6e3a1; done
 setup_popup meeting 0xffcba6f7
 for i in 1 2 3; do add_popup_line meeting meeting.line$i 0xffcba6f7; done
 
+
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update

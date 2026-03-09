@@ -2,10 +2,39 @@
     "profiles": [
         {
             "complex_modifications": {
+                "parameters": {
+                    "basic.to_if_alone_timeout_milliseconds": 300
+                },
                 "rules": [
                     {
-                        "description": "Caps Lock to Hyper (Ctrl+Shift+Opt+Cmd) when held, Escape when tapped alone",
+                        "description": "Caps Lock: Hyper when held, Escape/double-tap chord mode",
                         "manipulators": [
+                            {
+                                "conditions": [
+                                    { "name": "hyper_recent_tap", "type": "variable_if", "value": 1 }
+                                ],
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    { "set_variable": { "name": "hyper", "value": 1 } },
+                                    {
+                                        "key_code": "left_shift",
+                                        "modifiers": ["left_command", "left_control", "left_option"]
+                                    },
+                                    { "shell_command": "/opt/homebrew/bin/sketchybar --set hyper icon.background.color=0xfff9e2af icon.color=0xff1e1e2e label='Hyper' label.color=0xfff9e2af label.padding_left=6" }
+                                ],
+                                "to_if_alone": [
+                                    { "set_variable": { "name": "hyper_chord_mode", "value": 1 } },
+                                    { "set_variable": { "name": "hyper_recent_tap", "value": 0 } },
+                                    { "shell_command": "touch /tmp/hyper_chord_mode && /opt/homebrew/bin/sketchybar --set hyper icon.background.color=0xffcba6f7 icon.color=0xff1e1e2e label='Chord...' label.color=0xffcba6f7 label.padding_left=6" }
+                                ],
+                                "to_after_key_up": [
+                                    { "set_variable": { "name": "hyper", "value": 0 } }
+                                ],
+                                "type": "basic"
+                            },
                             {
                                 "from": {
                                     "key_code": "caps_lock",
@@ -19,50 +48,65 @@
                                     },
                                     { "shell_command": "/opt/homebrew/bin/sketchybar --set hyper icon.background.color=0xfff9e2af icon.color=0xff1e1e2e label='Hyper' label.color=0xfff9e2af label.padding_left=6" }
                                 ],
+                                "to_if_alone": [
+                                    { "key_code": "escape" },
+                                    { "set_variable": { "name": "hyper_recent_tap", "value": 1 } },
+                                    { "shell_command": "(sleep 0.4; '/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli' --set-variables '{\"hyper_recent_tap\":0}') &" }
+                                ],
                                 "to_after_key_up": [
                                     { "set_variable": { "name": "hyper", "value": 0 } },
-                                    { "set_variable": { "name": "hyper_g", "value": 0 } },
                                     { "shell_command": "~/.config/karabiner/assets/hyper_release.sh" }
                                 ],
-                                "to_if_alone": [{ "key_code": "escape" }],
                                 "type": "basic"
                             }
                         ]
                     },
                     {
-                        "description": "Hyper + g -> leader for 'g' chords",
+                        "description": "Chord mode: capture keys, enter to execute, esc to cancel",
                         "manipulators": [
+                            { "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }], "from": { "key_code": "a" }, "to": [{ "shell_command": "~/.config/karabiner/assets/hyper_key.sh a" }], "type": "basic" },
+                            { "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }], "from": { "key_code": "b" }, "to": [{ "shell_command": "~/.config/karabiner/assets/hyper_key.sh b" }], "type": "basic" },
+                            { "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }], "from": { "key_code": "c" }, "to": [{ "shell_command": "~/.config/karabiner/assets/hyper_key.sh c" }], "type": "basic" },
+                            { "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }], "from": { "key_code": "d" }, "to": [{ "shell_command": "~/.config/karabiner/assets/hyper_key.sh d" }], "type": "basic" },
+                            { "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }], "from": { "key_code": "e" }, "to": [{ "shell_command": "~/.config/karabiner/assets/hyper_key.sh e" }], "type": "basic" },
+                            { "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }], "from": { "key_code": "f" }, "to": [{ "shell_command": "~/.config/karabiner/assets/hyper_key.sh f" }], "type": "basic" },
+                            { "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }], "from": { "key_code": "g" }, "to": [{ "shell_command": "~/.config/karabiner/assets/hyper_key.sh g" }], "type": "basic" },
+                            { "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }], "from": { "key_code": "h" }, "to": [{ "shell_command": "~/.config/karabiner/assets/hyper_key.sh h" }], "type": "basic" },
+                            { "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }], "from": { "key_code": "i" }, "to": [{ "shell_command": "~/.config/karabiner/assets/hyper_key.sh i" }], "type": "basic" },
+                            { "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }], "from": { "key_code": "j" }, "to": [{ "shell_command": "~/.config/karabiner/assets/hyper_key.sh j" }], "type": "basic" },
+                            { "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }], "from": { "key_code": "k" }, "to": [{ "shell_command": "~/.config/karabiner/assets/hyper_key.sh k" }], "type": "basic" },
+                            { "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }], "from": { "key_code": "l" }, "to": [{ "shell_command": "~/.config/karabiner/assets/hyper_key.sh l" }], "type": "basic" },
+                            { "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }], "from": { "key_code": "m" }, "to": [{ "shell_command": "~/.config/karabiner/assets/hyper_key.sh m" }], "type": "basic" },
+                            { "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }], "from": { "key_code": "n" }, "to": [{ "shell_command": "~/.config/karabiner/assets/hyper_key.sh n" }], "type": "basic" },
+                            { "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }], "from": { "key_code": "o" }, "to": [{ "shell_command": "~/.config/karabiner/assets/hyper_key.sh o" }], "type": "basic" },
+                            { "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }], "from": { "key_code": "p" }, "to": [{ "shell_command": "~/.config/karabiner/assets/hyper_key.sh p" }], "type": "basic" },
+                            { "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }], "from": { "key_code": "q" }, "to": [{ "shell_command": "~/.config/karabiner/assets/hyper_key.sh q" }], "type": "basic" },
+                            { "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }], "from": { "key_code": "r" }, "to": [{ "shell_command": "~/.config/karabiner/assets/hyper_key.sh r" }], "type": "basic" },
+                            { "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }], "from": { "key_code": "s" }, "to": [{ "shell_command": "~/.config/karabiner/assets/hyper_key.sh s" }], "type": "basic" },
+                            { "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }], "from": { "key_code": "t" }, "to": [{ "shell_command": "~/.config/karabiner/assets/hyper_key.sh t" }], "type": "basic" },
+                            { "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }], "from": { "key_code": "u" }, "to": [{ "shell_command": "~/.config/karabiner/assets/hyper_key.sh u" }], "type": "basic" },
+                            { "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }], "from": { "key_code": "v" }, "to": [{ "shell_command": "~/.config/karabiner/assets/hyper_key.sh v" }], "type": "basic" },
+                            { "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }], "from": { "key_code": "w" }, "to": [{ "shell_command": "~/.config/karabiner/assets/hyper_key.sh w" }], "type": "basic" },
+                            { "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }], "from": { "key_code": "x" }, "to": [{ "shell_command": "~/.config/karabiner/assets/hyper_key.sh x" }], "type": "basic" },
+                            { "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }], "from": { "key_code": "y" }, "to": [{ "shell_command": "~/.config/karabiner/assets/hyper_key.sh y" }], "type": "basic" },
+                            { "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }], "from": { "key_code": "z" }, "to": [{ "shell_command": "~/.config/karabiner/assets/hyper_key.sh z" }], "type": "basic" },
+                            { "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }], "from": { "key_code": "delete_or_backspace" }, "to": [{ "shell_command": "~/.config/karabiner/assets/hyper_key.sh backspace" }], "type": "basic" },
+                            { "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }], "from": { "key_code": "spacebar" }, "to": [{ "shell_command": "~/.config/karabiner/assets/hyper_key.sh ' '" }], "type": "basic" },
                             {
-                                "conditions": [
-                                    { "name": "hyper", "type": "variable_if", "value": 1 }
-                                ],
-                                "from": {
-                                    "key_code": "g",
-                                    "modifiers": { "optional": ["any"] }
-                                },
+                                "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }],
+                                "from": { "key_code": "return_or_enter" },
                                 "to": [
-                                    { "set_variable": { "name": "hyper_g", "value": 1 } },
-                                    { "shell_command": "/opt/homebrew/bin/sketchybar --set hyper label='g...'" }
+                                    { "set_variable": { "name": "hyper_chord_mode", "value": 0 } },
+                                    { "shell_command": "rm -f /tmp/hyper_chord_mode && ~/.config/karabiner/assets/hyper_release.sh" }
                                 ],
                                 "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Hyper + g, h -> stage GitHub action",
-                        "manipulators": [
+                            },
                             {
-                                "conditions": [
-                                    { "name": "hyper", "type": "variable_if", "value": 1 },
-                                    { "name": "hyper_g", "type": "variable_if", "value": 1 }
-                                ],
-                                "from": {
-                                    "key_code": "h",
-                                    "modifiers": { "optional": ["any"] }
-                                },
+                                "conditions": [{ "name": "hyper_chord_mode", "type": "variable_if", "value": 1 }],
+                                "from": { "key_code": "escape" },
                                 "to": [
-                                    { "set_variable": { "name": "hyper_g", "value": 0 } },
-                                    { "shell_command": "echo gh > /tmp/hyper_action && /opt/homebrew/bin/sketchybar --set hyper label='gh -> GitHub'" }
+                                    { "set_variable": { "name": "hyper_chord_mode", "value": 0 } },
+                                    { "shell_command": "rm -f /tmp/hyper_action /tmp/hyper_buffer /tmp/hyper_chord_mode && /opt/homebrew/bin/sketchybar --set hyper icon.background.color=0xff585b70 icon.color=0xff1e1e2e label='' label.color=0xff585b70 label.padding_left=0" }
                                 ],
                                 "type": "basic"
                             }

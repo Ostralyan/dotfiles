@@ -1,0 +1,35 @@
+# Harp — Hyper key chord configuration
+# Double-tap Caps Lock to enter chord mode, type a chord, press Enter.
+#
+# Matching priority: longest exact match wins.
+# Use quotes for chords with spaces: [chords."gcp sql"]
+# Use args = true for chords that take freeform input (e.g. search).
+
+[chords.gh]
+label = "gh → GitHub"
+action = 'open "https://github.com/dideroai/didero"'
+
+[chords.g]
+label = "g → Google"
+args = true
+action = 'open "https://google.com/search?q={arg}"'
+
+[chords.r]
+label = "r → Reddit"
+action = 'open "https://reddit.com"'
+
+[chords.gcp]
+label = "gcp → GCP Console"
+action = 'open "https://console.cloud.google.com"'
+
+[chords."gcp sql"]
+label = "gcp sql → Cloud SQL"
+action = 'open "https://console.cloud.google.com/sql/instances"'
+
+[chords."gcp run"]
+label = "gcp run → Cloud Run"
+action = 'open "https://console.cloud.google.com/run"'
+
+[chords."gcp billing"]
+label = "gcp billing → Billing"
+action = 'open "https://console.cloud.google.com/billing"'

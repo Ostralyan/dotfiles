@@ -1,13 +1,38 @@
+# This file is a template. Paths listed here are left unmanaged.
+
+# Repo docs — belong in the repo, not in $HOME
+README.md
+
+# chezmoi's own config, which holds the answers to the init prompts
 .config/chezmoi
+
+# Credentials and tool state we never want in a public repo
+.ssh
+.config/gcloud
+.config/stripe
+.config/didero
 .config/AWSVPNClient
 .config/AWS VPN Client
 .config/pgcli
-.ssh
-.config/didero
-.config/gcloud
-.config/stripe
-.config/tmux/plugins
+.config/gh/hosts.yml
 
-# Runtime caches written by the sketchybar stock plugin — not config
+# Machine-local state, rewritten by the tools themselves
+.config/fish/fish_variables
+.config/karabiner/automatic_backups
 .config/sketchybar/plugins/.stock_cache
 .config/sketchybar/plugins/.stock_index
+.config/sketchybar/plugins/.cal_offset
+
+# tmux plugins are managed by TPM, which is itself a chezmoi external
+.config/tmux/plugins
+!.config/tmux/plugins/tpm
+
+{{ if not .personal -}}
+# --- personal macOS rig: only installed when `personal = true` --------------
+.config/aerospace
+.config/sketchybar
+.config/karabiner
+.config/harp
+.config/homebrew/Brewfile.rig
+.config/homebrew/Brewfile.apps
+{{- end }}

@@ -1,0 +1,63 @@
+# Core toolchain — installed on every machine, shared with the team.
+#
+#   brew bundle --file=~/.config/homebrew/Brewfile
+#
+# or just run `setup_brew_packages`, which walks every Brewfile here.
+
+# --- shell ---------------------------------------------------------------
+brew "fish"          # login shell; config lives in ~/.config/fish
+brew "fisher"        # fish plugin manager
+brew "starship"      # prompt
+brew "atuin"         # shell history
+brew "zoxide"        # smarter cd
+
+# --- cli ------------------------------------------------------------------
+brew "bat"           # cat with highlighting
+brew "eza"           # ls replacement
+brew "fd"            # find replacement
+brew "fzf"           # fuzzy finder
+brew "ripgrep"       # grep replacement
+brew "chezmoi"       # these dotfiles
+brew "gh"            # GitHub CLI
+brew "tmux"
+
+# --- editor ---------------------------------------------------------------
+brew "neovim"
+brew "tree-sitter-cli"
+
+# --- languages / runtimes -------------------------------------------------
+brew "go"
+brew "rustup"
+brew "uv"            # python
+brew "fnm"           # node; config.fish calls `fnm env --use-on-cd`
+
+# --- didero backend toolchain ---------------------------------------------
+brew "postgresql@14"
+brew "pgcli"
+brew "cloud-sql-proxy"
+brew "cloudflared"
+brew "pre-commit"
+brew "ruff"
+
+# --- terminal + font ------------------------------------------------------
+cask "ghostty"
+cask "font-fantasque-sans-mono-nerd-font"
+
+# --- ai tooling -----------------------------------------------------------
+cask "claude"
+cask "claude-code@latest"
+cask "codex"
+
+# --- cloud ----------------------------------------------------------------
+cask "gcloud-cli"
+cask "session-manager-plugin"
+cask "orbstack"
+
+# --- work apps ------------------------------------------------------------
+cask "slack"
+cask "linear"
+cask "notion"
+cask "figma"
+cask "bruno"             # API client
+cask "beekeeper-studio"  # DB client
+cask "google-chrome"

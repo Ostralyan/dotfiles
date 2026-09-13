@@ -1,0 +1,27 @@
+# Personal apps and side-project toolchain.
+#
+# Only installed when `personal = true`. Nothing here is needed for didero
+# work — it is here so a fresh machine comes back whole.
+
+# --- side-project toolchain ----------------------------------------------
+brew "cloc"
+brew "cocoapods"
+brew "graphviz"
+brew "llvm"
+brew "opencv"
+brew "sccache"
+brew "tflint"
+
+# --- apps -----------------------------------------------------------------
+cask "chatgpt"
+cask "iina"                  # video player
+cask "obs"                   # screen recording
+cask "cap"                   # screen recording
+cask "blackhole-2ch"         # virtual audio device
+cask "transmission"
+cask "surfshark"
+cask "thebrowsercompany-dia"
+cask "bambu-studio"          # 3d printing
+cask "muse-code"
+cask "dotnet-sdk"
+cask "flutter"

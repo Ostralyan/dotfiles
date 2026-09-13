@@ -1,0 +1,18 @@
+# Personal macOS window-manager rig.
+#
+# Only installed when `personal = true` in ~/.config/chezmoi/chezmoi.toml —
+# otherwise chezmoi never writes this file at all. Pairs with the
+# aerospace / sketchybar / karabiner / harp configs under ~/.config.
+
+tap "felixkratz/formulae"
+tap "nikitabobko/tap"
+tap "otuerk/sidebar"
+
+brew "felixkratz/formulae/sketchybar"  # status bar
+brew "ical-buddy"                      # feeds the sketchybar meeting widget
+
+cask "nikitabobko/tap/aerospace"       # tiling window manager
+cask "karabiner-elements"              # hyper key, drives harp chords
+cask "otuerk/sidebar/sidebar"
+cask "itsycal"
+cask "alt-tab"

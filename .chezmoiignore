@@ -27,6 +27,12 @@ README.md
 .config/tmux/plugins
 !.config/tmux/plugins/tpm
 
+# Owned by the didero repo. scripts/onboard.sh and scripts/install-linux.sh
+# both write this function on every run, and it wraps `xudo`, which only
+# exists on a machine that has been through onboarding. Onboarding is
+# mandatory and these dotfiles are optional, so the work repo keeps it.
+.config/fish/functions/wtcd.fish
+
 {{ if not .personal -}}
 # --- personal macOS rig: only installed when `personal = true` --------------
 .config/aerospace

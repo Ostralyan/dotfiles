@@ -2,7 +2,10 @@ if status is-interactive
     atuin init fish | source
 end
 
-set -gx CLOUDSDK_PYTHON /opt/homebrew/bin/python3.14
+# gcloud needs a python it can import from; only pin it if that build is here.
+if test -x /opt/homebrew/bin/python3.14
+    set -gx CLOUDSDK_PYTHON /opt/homebrew/bin/python3.14
+end
 starship init fish | source
 fish_vi_key_bindings
 
@@ -130,7 +133,9 @@ function zk --description 'Kill process on port'
     end
 end
 # fnm (Fast Node Manager)
-fnm env --use-on-cd | source
+if command -q fnm
+    fnm env --use-on-cd | source
+end
 
 
 # bun

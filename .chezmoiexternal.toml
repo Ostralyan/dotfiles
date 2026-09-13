@@ -1,3 +1,10 @@
 [".config/ghostty/shaders"]
     type = "git-repo"
     url = "https://github.com/sahaj-b/ghostty-cursor-shaders.git"
+
+# tmux.conf ends with `run '~/.config/tmux/plugins/tpm/tpm'`, so TPM has to be
+# on disk before tmux will start cleanly. TPM installs the other plugins itself.
+[".config/tmux/plugins/tpm"]
+    type = "git-repo"
+    url = "https://github.com/tmux-plugins/tpm.git"
+    refreshPeriod = "168h"

@@ -8,7 +8,7 @@ fish · ghostty · starship · atuin · zoxide · neovim · tmux
 
 ```sh
 brew install chezmoi
-chezmoi init Ostralyan/dotfiles   # clones + asks three questions
+chezmoi init Ostralyan/dotfiles   # clones + asks for your name and email
 chezmoi diff                      # see exactly what would change in $HOME
 chezmoi apply                     # write it
 ```
@@ -27,16 +27,16 @@ the login shell? Use the guided script in the didero repo:
 Then **open Ghostty**, not Terminal.app. The theme, the nerd font and the cursor
 shader only apply there.
 
-## The three questions
+## The two questions
 
 | Prompt | What it does |
 |---|---|
 | Full name for git commits | Fills `[user] name` in `~/.config/git/config` |
 | Email for git commits | Fills `[user] email` — use your didero address |
-| Install the personal macOS rig | Answer **N**. See below. |
 
-Answers are stored in `~/.config/chezmoi/chezmoi.toml`, which is never
-committed. To change them later, edit that file or re-run `chezmoi init`.
+That's the whole setup. Answers are stored in `~/.config/chezmoi/chezmoi.toml`,
+which is never committed. To change them later, edit that file or re-run
+`chezmoi init`.
 
 ## What you get
 
@@ -51,19 +51,22 @@ committed. To change them later, edit that file or re-run `chezmoi init`.
 | `git` | aliases (`lg`, `co`, `cax`, `aic`, `loc`, ...) and a global ignore |
 | `bat`, `eza`, `fzf` | catppuccin themes |
 
-## The `personal` flag
+## The personal rig (off by default, ignore this)
 
-Answering **y** to the third question adds a macOS window-manager rig that is
-tied to one specific machine and monitor layout. It is almost certainly not what
-you want:
+The repo also carries a single-machine macOS window-manager setup — `aerospace`,
+`sketchybar`, `karabiner` and `harp`. It is tied to one specific monitor layout,
+you are never asked about it, and it is **never written** unless you go out of
+your way to turn it on.
 
-- `aerospace` — tiling window manager
-- `sketchybar` — status bar (30 plugin scripts, stock ticker, meeting widget)
-- `karabiner` — hyper key
-- `harp` — hyper-key chord launcher
+If you actually want it:
 
-With `personal = false` those directories are never written, and neither are
-`Brewfile.rig` / `Brewfile.apps`.
+```sh
+DOTFILES_PERSONAL=1 chezmoi init Ostralyan/dotfiles
+```
+
+or set `personal = true` under `[data]` in `~/.config/chezmoi/chezmoi.toml` and
+run `chezmoi apply`. That also unlocks `Brewfile.rig` and `Brewfile.apps`. Once
+set it stays set, including across re-runs of `chezmoi init`.
 
 ## Packages
 

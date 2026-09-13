@@ -3,9 +3,24 @@
    ~/.config/chezmoi/chezmoi.toml, which is never committed.
 */ -}}
 
-{{- $name    := promptStringOnce . "name"  "Full name for git commits" -}}
-{{- $email   := promptStringOnce . "email" "Email for git commits" -}}
-{{- $personal := promptBoolOnce . "personal" "Install the personal macOS rig (aerospace + sketchybar + karabiner + harp)" false -}}
+{{- $name  := promptStringOnce . "name"  "Full name for git commits" -}}
+{{- $email := promptStringOnce . "email" "Email for git commits" -}}
+
+{{/*
+   `personal` is deliberately NOT prompted. It gates a single-machine
+   window-manager rig that nobody else has any reason to think about, so
+   asking would only be a question with one right answer.
+
+   It stays on once it is on. To turn it on for a new machine:
+
+       DOTFILES_PERSONAL=1 chezmoi init Ostralyan/dotfiles
+
+   or add `personal = true` under [data] in this generated config and
+   re-run `chezmoi apply`.
+*/ -}}
+{{- $personal := false -}}
+{{- if hasKey . "personal" }}{{ $personal = .personal }}{{ end -}}
+{{- if env "DOTFILES_PERSONAL" }}{{ $personal = true }}{{ end -}}
 
 [data]
     name = {{ $name | quote }}

@@ -7,3 +7,7 @@
 .config/gcloud
 .config/stripe
 .config/tmux/plugins
+
+# Runtime caches written by the sketchybar stock plugin — not config
+.config/sketchybar/plugins/.stock_cache
+.config/sketchybar/plugins/.stock_index

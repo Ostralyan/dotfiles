@@ -1,8 +1,8 @@
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason.nvim",
+    "mason-org/mason-lspconfig.nvim",
     "saghen/blink.cmp",  -- Use blink instead of nvim-cmp
   },
   config = function()
@@ -17,7 +17,6 @@ return {
         "cssls",            -- CSS
         "gopls",            -- Go
       },
-      automatic_installation = true,
     })
     -- Share blink capabilities with every server we enable.
     local capabilities = require('blink.cmp').get_lsp_capabilities()

@@ -13,6 +13,11 @@ background-blur = true
 background-blur-radius = 25
 auto-update = download
 
+# Option sends Alt, so tmux's M-a prefix and other M- bindings work. Unset,
+# Ghostty only does this on the U.S. layouts; on others (e.g. ABC, the default
+# on many new Macs) Option+A types "å" instead.
+macos-option-as-alt = true
+
 # Cursor trail shader
 custom-shader = shaders/cursor_warp.glsl
 custom-shader-animation = always

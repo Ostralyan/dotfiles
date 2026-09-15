@@ -33,7 +33,6 @@ brew "fnm"           # node; config.fish calls `fnm env --use-on-cd`
 
 # --- didero backend toolchain ---------------------------------------------
 brew "postgresql@14"
-brew "pgcli"
 brew "cloud-sql-proxy"
 brew "cloudflared"
 brew "pre-commit"
@@ -58,6 +57,4 @@ cask "slack"
 cask "linear"
 cask "notion"
 cask "figma"
-cask "bruno"             # API client
-cask "beekeeper-studio"  # DB client
-cask "google-chrome"
+cask "thebrowsercompany-dia"  # browser

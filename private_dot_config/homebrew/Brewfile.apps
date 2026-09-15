@@ -20,7 +20,6 @@ cask "cap"                   # screen recording
 cask "blackhole-2ch"         # virtual audio device
 cask "transmission"
 cask "surfshark"
-cask "thebrowsercompany-dia"
 cask "bambu-studio"          # 3d printing
 cask "muse-code"
 cask "dotnet-sdk"
